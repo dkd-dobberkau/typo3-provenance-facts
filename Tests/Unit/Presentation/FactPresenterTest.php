@@ -68,6 +68,37 @@ final class FactPresenterTest extends UnitTestCase
         self::assertSame('https://schema.org/revenue', $annotation['body']['predicate']);
     }
 
+    #[Test]
+    public function validityDatesAreTheCalendarDaysTheEditorEnteredInTheServerTimeZone(): void
+    {
+        $previousTimeZone = date_default_timezone_get();
+        date_default_timezone_set('Europe/Berlin');
+        try {
+            // TYPO3 stores a date field as midnight in the server time zone.
+            $midnight = static fn(string $day): int => (new \DateTimeImmutable($day, new \DateTimeZone('Europe/Berlin')))->getTimestamp();
+            $fact = new Fact(
+                factId: 'revenue-2025',
+                quote: '12.4 million EUR',
+                subject: 'https://example.org/company',
+                predicate: 'revenue',
+                objectLiteral: '12400000',
+                objectUri: null,
+                sourceUrl: null,
+                confidence: 'measured',
+                validFrom: $midnight('2025-01-01'),
+                validUntil: $midnight('2025-12-31'),
+                createdAt: 1794560400,
+            );
+
+            $claim = (new FactPresenter())->claim($fact, self::PAGE);
+        } finally {
+            date_default_timezone_set($previousTimeZone);
+        }
+
+        self::assertSame('2025-01-01', $claim['validFrom']);
+        self::assertSame('2025-12-31', $claim['validUntil']);
+    }
+
     private function fact(string $predicate = 'https://schema.org/revenue', ?string $objectUri = null): Fact
     {
         return new Fact(

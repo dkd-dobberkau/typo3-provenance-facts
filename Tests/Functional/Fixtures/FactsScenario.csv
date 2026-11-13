@@ -3,9 +3,9 @@
 ,1,0,"Root","/",1,1,0,1
 ,2,1,"Hidden page","/hidden",1,0,1,2
 "tx_provenance_document"
-,"uid","pid","document_uri","conformance_level"
-,1,1,"urn:uuid:00000000-0000-4000-8000-000000000001",2
-,2,2,"urn:uuid:00000000-0000-4000-8000-000000000002",2
+,"uid","pid","document_uri","first_published_at","last_substantive_revision_at","authors"
+,1,1,"urn:uuid:00000000-0000-4000-8000-000000000001",1778749200,1778752800,"1"
+,2,2,"urn:uuid:00000000-0000-4000-8000-000000000002",1778749200,1778752800,"1"
 "tt_content"
 ,"uid","pid","CType","colPos","sorting","bodytext","provenance_facts"
 ,1,1,"text",0,256,"<p>Revenue grew to 12.4 million EUR in 2025.</p>",2
@@ -16,5 +16,5 @@
 ,2,1,1,512,1,"draft-fact","2025","https://example.org/company","foundingDate","2025","","asserted",1794560400
 ,3,2,2,256,0,"secret","7","https://example.org/company","numberOfEmployees","7","","asserted",1794560400
 "be_users"
-,"uid","pid","username","admin"
-,1,0,"admin",1
+,"uid","pid","username","admin","realName","external_identity_uri"
+,1,0,"admin",1,"Ada Lovelace","https://orcid.org/0000-0001-2345-6789"

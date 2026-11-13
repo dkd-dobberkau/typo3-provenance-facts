@@ -48,7 +48,7 @@ final class FactsTest extends FunctionalTestCase
         self::assertSame('http://localhost/#fact-revenue-2025', $record->claim[0]->{'@id'});
         self::assertSame('https://schema.org/revenue', $record->claim[0]->predicate);
         self::assertSame('12400000', $record->claim[0]->object);
-        self::assertSame(2, $record->cpsConformance, 'L4 needs signing and audit as well');
+        self::assertSame(2, $record->cpsConformance, 'facts alone do not raise the level; L4 needs a signature as well');
     }
 
     #[Test]

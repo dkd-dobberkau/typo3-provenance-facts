@@ -6,8 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- Facts no longer raise the conformance level themselves; the signing
+  extension sets it from the finished record.
+
 ### Fixed
 
+- `validFrom` and `validUntil` were one day early on servers east of UTC: date
+  fields hold midnight in the server time zone and were formatted in UTC.
 - Security: the facts endpoint published facts of pages below a hidden or
   access-restricted page (`extendToSubpages`) to anonymous visitors, including
   the quoted words. It now checks every page above the fact's page through

@@ -68,8 +68,12 @@ final class FactPresenter
         return preg_match('/^[a-z][a-z0-9+.-]*:/i', $predicate) === 1 ? $predicate : self::DEFAULT_VOCABULARY . $predicate;
     }
 
+    /**
+     * A date field holds midnight in the server time zone; formatting it in
+     * UTC would give the previous day east of Greenwich.
+     */
     private function date(?int $timestamp): ?string
     {
-        return $timestamp !== null ? gmdate('Y-m-d', $timestamp) : null;
+        return $timestamp !== null ? date('Y-m-d', $timestamp) : null;
     }
 }

@@ -6,8 +6,8 @@
 ,5,1,"Embargoed","/embargoed",1,0,1,"",1,0
 ,6,5,"Results","/embargoed/results",1,0,0,"",0,0
 "tx_provenance_document"
-,"uid","pid","document_uri","conformance_level"
-,1,1,"urn:uuid:00000000-0000-4000-8000-000000000001",2
+,"uid","pid","document_uri"
+,1,1,"urn:uuid:00000000-0000-4000-8000-000000000001"
 "tt_content"
 ,"uid","pid","CType","colPos","sorting","bodytext","provenance_facts"
 ,3,4,"text",0,256,"<p>The board decided to close the Hamburg office.</p>",1
