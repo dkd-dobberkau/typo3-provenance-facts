@@ -8,5 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Facts on content elements (milestone M6): data model, page anchors with
+  Claim Microdata, `claim` list in the provenance record, Web Annotations
+  under `/.well-known/content-provenance/facts/{factId}`, conformance level 4
+  together with signing and audit.
 - Repository skeleton: composer.json, ext_emconf.php, Services.yaml,
   extension icon, contribution guide (milestone M1).

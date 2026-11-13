@@ -7,16 +7,43 @@ TYPO3 reference implementation of **Layer 3** of the
 
 Optional extension. Requires the core extension [`provenance`](https://github.com/dkd-dobberkau/typo3-provenance).
 
-> **Status: experimental, pre-release.** This repository currently contains the
-> skeleton only (milestone M1 of the [PRD](https://github.com/dkd-dobberkau/cms-provenance.org/blob/main/docs/prd-typo3-extensions.md)). Nothing here is
-> ready for production use.
+> **Status: experimental, pre-release.** Milestone M6 of the
+> [PRD](https://github.com/dkd-dobberkau/cms-provenance.org/blob/main/docs/prd-typo3-extensions.md)
+> is in place, without the rich text editor button (see below). Together with
+> the signing and audit extensions a site reaches conformance level L4.
+> Nothing here is ready for production use.
 
-## Scope
+## How it works
 
-- Fact data model (subject, predicate, object, source, confidence, validity)
-- Rich text editor button for marking up facts
-- Microdata output inline in the rendered HTML
-- CLI: `provenance:facts:list`
+Editors add facts to a content element in the tab **Provenance facts**. A
+fact names the **quoted text** in the element, a **subject** (URI), a
+**predicate** (URI or schema.org term), a **value** (literal or URI),
+optional **evidence**, a **confidence** and a validity period.
+
+On the page, with the site set **Content Provenance: facts**
+(`cms-provenance/provenance-facts`):
+
+- the quoted text is wrapped in `<span id="fact-{factId}">` with schema.org
+  `Claim` Microdata, so `https://example.org/page#fact-revenue-2025` points at
+  it; the visible text does not change, so signatures stay valid;
+- the page's provenance record gets a `claim` list, which the signing
+  extension signs along with the rest;
+- `/.well-known/content-provenance/facts/{factId}` returns the fact as a W3C
+  Web Annotation, targeting the fragment and the quoted text
+  (`TextQuoteSelector`).
+
+With the signing and audit extensions installed, records with facts claim
+`cpsConformance: 4`.
+
+Limits of this version:
+
+- The quote must sit inside one paragraph without formatting in between;
+  otherwise it is not anchored on the page (the annotation still identifies
+  it by its text).
+- The site set uses `tt_content.stdWrap.postUserFunc`; a site package that
+  sets it as well overrides one of the two.
+- Marking facts directly in the rich text editor is planned as a CKEditor
+  plugin on top of the same data model.
 
 ## Requirements
 

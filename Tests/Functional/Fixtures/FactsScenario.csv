@@ -1,0 +1,20 @@
+"pages"
+,"uid","pid","title","slug","doktype","is_siteroot","hidden","provenance_document_uid"
+,1,0,"Root","/",1,1,0,1
+,2,1,"Hidden page","/hidden",1,0,1,2
+"tx_provenance_document"
+,"uid","pid","document_uri","conformance_level"
+,1,1,"urn:uuid:00000000-0000-4000-8000-000000000001",2
+,2,2,"urn:uuid:00000000-0000-4000-8000-000000000002",2
+"tt_content"
+,"uid","pid","CType","colPos","sorting","bodytext","provenance_facts"
+,1,1,"text",0,256,"<p>Revenue grew to 12.4 million EUR in 2025.</p>",2
+,2,2,"text",0,256,"<p>Secret figure 7.</p>",1
+"tx_provenancefacts_fact"
+,"uid","pid","content_uid","sorting","hidden","fact_id","quote","subject","predicate","object_literal","source_url","confidence","crdate"
+,1,1,1,256,0,"revenue-2025","12.4 million EUR","https://example.org/company","revenue","12400000","https://example.org/annual-report.pdf","measured",1794560400
+,2,1,1,512,1,"draft-fact","2025","https://example.org/company","foundingDate","2025","","asserted",1794560400
+,3,2,2,256,0,"secret","7","https://example.org/company","numberOfEmployees","7","","asserted",1794560400
+"be_users"
+,"uid","pid","username","admin"
+,1,0,"admin",1

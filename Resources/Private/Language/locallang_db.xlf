@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="EXT:provenance_facts/Resources/Private/Language/locallang_db.xlf" product-name="provenance_facts">
+		<header/>
+		<body>
+			<trans-unit id="tx_provenancefacts_fact" resname="tx_provenancefacts_fact">
+				<source>Provenance fact</source>
+			</trans-unit>
+			<trans-unit id="tx_provenancefacts_fact.fact_id" resname="tx_provenancefacts_fact.fact_id">
+				<source>Fact ID</source>
+			</trans-unit>
+			<trans-unit id="tx_provenancefacts_fact.fact_id.description" resname="tx_provenancefacts_fact.fact_id.description">
+				<source>Unique across the installation, lowercase, for example "revenue-2025". Becomes the anchor #fact-… and the annotation URL.</source>
+			</trans-unit>
+			<trans-unit id="tx_provenancefacts_fact.quote" resname="tx_provenancefacts_fact.quote">
+				<source>Quoted text</source>
+			</trans-unit>
+			<trans-unit id="tx_provenancefacts_fact.quote.description" resname="tx_provenancefacts_fact.quote.description">
+				<source>The exact words in this content element that state the fact. They are marked on the page; keep them within one paragraph and without formatting.</source>
+			</trans-unit>
+			<trans-unit id="tx_provenancefacts_fact.subject" resname="tx_provenancefacts_fact.subject">
+				<source>Subject</source>
+			</trans-unit>
+			<trans-unit id="tx_provenancefacts_fact.subject.description" resname="tx_provenancefacts_fact.subject.description">
+				<source>What the fact is about, as a URI (for example the organisation, product or place).</source>
+			</trans-unit>
+			<trans-unit id="tx_provenancefacts_fact.predicate" resname="tx_provenancefacts_fact.predicate">
+				<source>Predicate</source>
+			</trans-unit>
+			<trans-unit id="tx_provenancefacts_fact.predicate.description" resname="tx_provenancefacts_fact.predicate.description">
+				<source>The property stated, as a URI or a schema.org term such as "numberOfEmployees".</source>
+			</trans-unit>
+			<trans-unit id="tx_provenancefacts_fact.object_literal" resname="tx_provenancefacts_fact.object_literal">
+				<source>Value</source>
+			</trans-unit>
+			<trans-unit id="tx_provenancefacts_fact.object_uri" resname="tx_provenancefacts_fact.object_uri">
+				<source>Value as URI</source>
+			</trans-unit>
+			<trans-unit id="tx_provenancefacts_fact.source_url" resname="tx_provenancefacts_fact.source_url">
+				<source>Evidence</source>
+			</trans-unit>
+			<trans-unit id="tx_provenancefacts_fact.confidence" resname="tx_provenancefacts_fact.confidence">
+				<source>Confidence</source>
+			</trans-unit>
+			<trans-unit id="tx_provenancefacts_fact.valid_from" resname="tx_provenancefacts_fact.valid_from">
+				<source>Valid from</source>
+			</trans-unit>
+			<trans-unit id="tx_provenancefacts_fact.valid_until" resname="tx_provenancefacts_fact.valid_until">
+				<source>Valid until</source>
+			</trans-unit>
+			<trans-unit id="confidence.asserted" resname="confidence.asserted">
+				<source>Asserted</source>
+			</trans-unit>
+			<trans-unit id="confidence.estimated" resname="confidence.estimated">
+				<source>Estimated</source>
+			</trans-unit>
+			<trans-unit id="confidence.measured" resname="confidence.measured">
+				<source>Measured</source>
+			</trans-unit>
+			<trans-unit id="tt_content.provenance_facts" resname="tt_content.provenance_facts">
+				<source>Facts</source>
+			</trans-unit>
+			<trans-unit id="tt_content.provenance_facts.description" resname="tt_content.provenance_facts.description">
+				<source>Statements in this element that machines can cite individually.</source>
+			</trans-unit>
+			<trans-unit id="tab.facts" resname="tab.facts">
+				<source>Provenance facts</source>
+			</trans-unit>
+			<trans-unit id="tab.statement" resname="tab.statement">
+				<source>Statement</source>
+			</trans-unit>
+			<trans-unit id="tab.evidence" resname="tab.evidence">
+				<source>Evidence</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

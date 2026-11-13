@@ -1,0 +1,4 @@
+name: cms-provenance/provenance-facts
+label: 'Content Provenance: facts'
+dependencies:
+  - cms-provenance/provenance

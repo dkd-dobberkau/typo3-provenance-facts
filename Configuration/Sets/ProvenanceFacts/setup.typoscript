@@ -1,0 +1,3 @@
+# Anchors the facts of each content element (id="fact-…" with Claim Microdata).
+# Uses the single postUserFunc slot of tt_content.stdWrap.
+tt_content.stdWrap.postUserFunc = CmsProvenance\ProvenanceFacts\Frontend\ContentElementFacts->render
