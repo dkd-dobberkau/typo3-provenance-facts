@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Security: the facts endpoint published facts of pages below a hidden or
+  access-restricted page (`extendToSubpages`) to anonymous visitors, including
+  the quoted words. It now checks every page above the fact's page through
+  `PublicPageRepository`.
 - Claim identifiers and Web Annotation URLs were relative when the site base
   was relative, such as `/`. They are now absolute, completed from the
   request.

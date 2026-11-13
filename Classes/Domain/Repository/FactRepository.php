@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CmsProvenance\ProvenanceFacts\Domain\Repository;
 
+use CmsProvenance\Provenance\Domain\Repository\PublicPageRepository;
 use CmsProvenance\ProvenanceFacts\Domain\Model\Fact;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -19,6 +20,7 @@ final readonly class FactRepository
 
     public function __construct(
         private ConnectionPool $connectionPool,
+        private PublicPageRepository $publicPageRepository,
     ) {}
 
     /**
@@ -65,7 +67,13 @@ final readonly class FactRepository
             ->executeQuery()
             ->fetchAssociative();
 
-        return $row !== false ? ['fact' => $this->map($row), 'pageUid' => (int)$row['page_uid']] : null;
+        // The query checks the fact's own page; hiding and access restrictions
+        // of the pages above it must keep it off the public endpoint as well.
+        if ($row === false || !$this->publicPageRepository->isPublic((int)$row['page_uid'], $GLOBALS['EXEC_TIME'] ?? time())) {
+            return null;
+        }
+
+        return ['fact' => $this->map($row), 'pageUid' => (int)$row['page_uid']];
     }
 
     private function publishedFacts(): QueryBuilder
