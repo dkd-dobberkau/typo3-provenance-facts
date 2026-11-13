@@ -56,6 +56,34 @@ export class ProvenanceFact extends Plugin {
         { text: 'Create fact', btnClass: 'btn-primary', name: 'create', trigger: () => this.submit(form, contentUid, selection.text, modal) },
       ],
     });
+    this.attachLookups(form, selection.text);
+  }
+
+  /**
+   * Other extensions can help editors fill the form: each module listed in the
+   * editor configuration "provenanceFact.lookups" exports a default function
+   * that receives the form, the quote, an empty panel above the fields and
+   * fill(values). A lookup that fails to load leaves the dialog as it is.
+   */
+  async attachLookups(form, quote) {
+    const panel = form.querySelector('.provenance-fact-lookups');
+    const fill = (values) => {
+      for (const [name, value] of Object.entries(values)) {
+        const input = form.querySelector(`[name="${name}"]`);
+        if (input && typeof value === 'string' && input.value !== value) {
+          input.value = value;
+          input.classList.add('is-valid');
+        }
+      }
+    };
+    for (const specifier of this.editor.config.get('provenanceFact.lookups') ?? []) {
+      try {
+        const module = await import(specifier);
+        await module.default({ form, quote, panel, fill });
+      } catch (error) {
+        console.warn(`Fact lookup ${specifier} could not be loaded.`, error);
+      }
+    }
   }
 
   readSelection() {
@@ -96,6 +124,9 @@ export class ProvenanceFact extends Plugin {
     if (selection.formatted) {
       form.append(this.hint('The selection contains formatting or a link. It stays citable, but the page cannot mark it.'));
     }
+    const lookups = document.createElement('div');
+    lookups.className = 'provenance-fact-lookups';
+    form.append(lookups);
 
     form.append(
       this.field('factId', 'Fact ID', 'input', this.slug(selection.text), 'Lowercase, unique, for example employees-2025. Becomes the anchor #fact-…'),

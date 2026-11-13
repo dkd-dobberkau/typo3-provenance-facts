@@ -47,6 +47,23 @@ Limits of this version:
   (`RTE.default.preset = provenance`) or add the plugin to your own preset,
   see the manual. The text is not changed; the quote is matched on the page.
 
+### Lookups in the fact dialog
+
+Other extensions can help editors research a fact in the **Fact** dialog. They
+add ES module specifiers to the editor configuration key
+`provenanceFact.lookups`, for example in a listener for rte_ckeditor's
+`AfterPrepareConfigurationForEditorEvent`. When the dialog opens, each module
+is imported and its default export is called with a context object:
+
+- `form`: the dialog's form element;
+- `quote`: the selected words;
+- `panel`: an empty element above the fields for the lookup's own interface;
+- `fill(values)`: sets any of `subject`, `predicate`, `objectLiteral`,
+  `objectUri` and `sourceUrl` and marks the changed fields.
+
+A lookup that fails to load is skipped with a console warning; the dialog
+works without it.
+
 ## Requirements
 
 - TYPO3 13.4 LTS or 14
