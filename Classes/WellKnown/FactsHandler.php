@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CmsProvenance\ProvenanceFacts\WellKnown;
 
+use CmsProvenance\Provenance\Service\AbsoluteUrlResolver;
 use CmsProvenance\Provenance\WellKnown\WellKnownHandlerInterface;
 use CmsProvenance\Provenance\WellKnown\WellKnownRouter;
 use CmsProvenance\ProvenanceFacts\Domain\Repository\FactRepository;
@@ -28,6 +29,7 @@ final readonly class FactsHandler implements WellKnownHandlerInterface
         private FactRepository $factRepository,
         private FactPresenter $factPresenter,
         private SiteFinder $siteFinder,
+        private AbsoluteUrlResolver $urlResolver,
     ) {}
 
     public function getSubPath(): string
@@ -43,10 +45,10 @@ final readonly class FactsHandler implements WellKnownHandlerInterface
             return new JsonResponse(['error' => 'unknown fact'], 404);
         }
 
-        $siteUrl = rtrim((string)$site->getBase(), '/');
+        $siteUrl = rtrim($this->urlResolver->siteUrl($site, $request), '/');
         $annotation = $this->factPresenter->annotation(
             $found['fact'],
-            (string)$site->getRouter()->generateUri($found['pageUid']),
+            $this->urlResolver->pageUrl($site, $found['pageUid'], $request),
             $siteUrl . WellKnownRouter::BASE_PATH . '/' . self::SUB_PATH . '/' . $found['fact']->factId
         );
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CmsProvenance\ProvenanceFacts\EventListener;
 
 use CmsProvenance\Provenance\Event\BeforeJsonLdEmittedEvent;
+use CmsProvenance\Provenance\Service\AbsoluteUrlResolver;
 use CmsProvenance\ProvenanceFacts\Domain\Repository\FactRepository;
 use CmsProvenance\ProvenanceFacts\Presentation\FactPresenter;
 use TYPO3\CMS\Core\Attribute\AsEventListener;
@@ -24,6 +25,7 @@ final readonly class AddClaimsToRecord
     public function __construct(
         private FactRepository $factRepository,
         private FactPresenter $factPresenter,
+        private AbsoluteUrlResolver $urlResolver,
     ) {}
 
     public function __invoke(BeforeJsonLdEmittedEvent $event): void
@@ -41,7 +43,7 @@ final readonly class AddClaimsToRecord
             return;
         }
 
-        $pageUrl = (string)$site->getRouter()->generateUri($pageInformation->getId());
+        $pageUrl = $this->urlResolver->pageUrl($site, $pageInformation->getId(), $request);
         $jsonLd['claim'] = array_map(fn($fact): array => $this->factPresenter->claim($fact, $pageUrl), $facts);
         // L4 Citable needs Layers 1 to 4: signatures and the audit endpoint as well.
         if (ExtensionManagementUtility::isLoaded('provenance_signing') && ExtensionManagementUtility::isLoaded('provenance_audit')) {

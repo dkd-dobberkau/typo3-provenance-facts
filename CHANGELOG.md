@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Claim identifiers and Web Annotation URLs were relative when the site base
+  was relative, such as `/`. They are now absolute, completed from the
+  request.
 - Labels of the facts field and tab resolve instead of showing raw keys.
 
 ### Added
