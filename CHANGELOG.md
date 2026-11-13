@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Documentation pointing to the manual of the core extension (milestone M7).
 - Facts on content elements (milestone M6): data model, page anchors with
   Claim Microdata, `claim` list in the provenance record, Web Annotations
   under `/.well-known/content-provenance/facts/{factId}`, conformance level 4
