@@ -6,8 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+
+- Labels of the facts field and tab resolve instead of showing raw keys.
+
 ### Added
 
+- "Fact" button for CKEditor 5 (RTE preset `provenance`): creates a fact for
+  the selected words through a backend AJAX route with the editor's
+  permissions.
 - Documentation pointing to the manual of the core extension (milestone M7).
 - Facts on content elements (milestone M6): data model, page anchors with
   Claim Microdata, `claim` list in the provenance record, Web Annotations

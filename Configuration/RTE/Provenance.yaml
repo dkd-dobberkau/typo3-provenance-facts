@@ -1,0 +1,45 @@
+# RTE preset "provenance": the TYPO3 default preset plus the "Fact" button.
+# Enable it with page TSconfig:  RTE.default.preset = provenance
+# To add the button to your own preset, copy importModules and the toolbar
+# item. TYPO3 merges imported lists by position, so both lists are complete.
+imports:
+  - { resource: 'EXT:rte_ckeditor/Configuration/RTE/Default.yaml' }
+
+editor:
+  config:
+    importModules:
+      - { module: '@typo3/rte-ckeditor/plugin/whitespace.js', exports: [ 'Whitespace' ] }
+      - { module: '@typo3/rte-ckeditor/plugin/typo3-link.js', exports: [ 'Typo3Link' ] }
+      - { module: '@cms-provenance/provenance-facts/fact-plugin.js', exports: [ 'ProvenanceFact' ] }
+
+    toolbar:
+      items:
+        - style
+        - heading
+        # grouping separator
+        - '|'
+        - bold
+        - italic
+        - subscript
+        - superscript
+        - softhyphen
+        - '|'
+        - bulletedList
+        - numberedList
+        - blockQuote
+        - alignment
+        - '|'
+        - findAndReplace
+        - link
+        - '|'
+        - removeFormat
+        - undo
+        - redo
+        - '|'
+        - insertTable
+        - '|'
+        - specialCharacters
+        - horizontalLine
+        - sourceEditing
+        - '|'
+        - provenanceFact

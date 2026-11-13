@@ -8,8 +8,8 @@ defined('TYPO3') or die();
 
 ExtensionManagementUtility::addTCAcolumns('tt_content', [
     'provenance_facts' => [
-        'label' => 'locallang_db.xlft_content.provenance_facts',
-        'description' => 'locallang_db.xlft_content.provenance_facts.description',
+        'label' => 'LLL:EXT:provenance_facts/Resources/Private/Language/locallang_db.xlf:tt_content.provenance_facts',
+        'description' => 'LLL:EXT:provenance_facts/Resources/Private/Language/locallang_db.xlf:tt_content.provenance_facts.description',
         'config' => [
             'type' => 'inline',
             'foreign_table' => 'tx_provenancefacts_fact',
@@ -26,5 +26,5 @@ ExtensionManagementUtility::addTCAcolumns('tt_content', [
 
 ExtensionManagementUtility::addToAllTCAtypes(
     'tt_content',
-    '--div--;locallang_db.xlfab.facts, provenance_facts'
+    '--div--;LLL:EXT:provenance_facts/Resources/Private/Language/locallang_db.xlf:tab.facts, provenance_facts'
 );

@@ -12,3 +12,6 @@ services:
   CmsProvenance\ProvenanceFacts\Frontend\ContentElementFacts:
     public: true
     shared: false
+
+  CmsProvenance\ProvenanceFacts\Backend\CreateFactController:
+    public: true

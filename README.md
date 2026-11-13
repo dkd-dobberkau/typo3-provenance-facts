@@ -9,7 +9,7 @@ Optional extension. Requires the core extension [`provenance`](https://github.co
 
 > **Status: experimental, pre-release.** Milestone M6 of the
 > [PRD](https://github.com/dkd-dobberkau/cms-provenance.org/blob/main/docs/prd-typo3-extensions.md)
-> is in place, without the rich text editor button (see below). Together with
+> is in place, including the rich text editor button. Together with
 > the signing and audit extensions a site reaches conformance level L4.
 > Nothing here is ready for production use.
 
@@ -42,8 +42,10 @@ Limits of this version:
   it by its text).
 - The site set uses `tt_content.stdWrap.postUserFunc`; a site package that
   sets it as well overrides one of the two.
-- Marking facts directly in the rich text editor is planned as a CKEditor
-  plugin on top of the same data model.
+- Facts can be created from the rich text editor: select words, press
+  **Fact**, describe the fact. Enable the RTE preset `provenance`
+  (`RTE.default.preset = provenance`) or add the plugin to your own preset,
+  see the manual. The text is not changed; the quote is matched on the page.
 
 ## Requirements
 

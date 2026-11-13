@@ -17,6 +17,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 final class FactsTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = ['cms-provenance/provenance', 'cms-provenance/provenance-facts'];
+    protected array $coreExtensionsToLoad = ['rte_ckeditor'];
 
     protected function setUp(): void
     {
