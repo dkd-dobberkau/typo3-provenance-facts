@@ -1,0 +1,150 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:layout name="Module"/>
+
+<f:section name="Before">
+    <f:asset.module identifier="@typo3/backend/global-event-handler.js"/>
+</f:section>
+
+<f:section name="Content">
+    <f:variable name="ll" value="LLL:EXT:provenance_facts/Resources/Private/Language/locallang_module.xlf:"/>
+    <h1><f:translate key="LLL:EXT:provenance_facts/Resources/Private/Language/locallang_mod_facts.xlf:mlang_labels_tablabel"/></h1>
+
+    <f:if condition="{pageSelected}">
+        <f:else>
+            <f:be.infobox state="-1"><f:translate key="LLL:EXT:provenance/Resources/Private/Language/locallang_module.xlf:selectPage"/></f:be.infobox>
+        </f:else>
+        <f:then>
+            <f:if condition="{mayView}">
+                <f:else>
+                    <f:be.infobox state="2"><f:translate key="{ll}noAccess"/></f:be.infobox>
+                </f:else>
+                <f:then>
+                    <f:render partial="Overview/Depth" arguments="{moduleUrl: moduleUrl, pageId: pageId, depth: depth, depths: depths}"/>
+
+                    <form action="{moduleUrl}" method="get" class="row row-cols-auto g-2 align-items-end mb-3">
+                        <input type="hidden" name="id" value="{pageId}"/>
+                        <div class="col">
+                            <label class="form-label" for="provenance-facts-search"><f:translate key="{ll}search"/></label>
+                            <input id="provenance-facts-search" type="search" name="search" value="{filter.search}" class="form-control" placeholder="{f:translate(key: '{ll}search.placeholder')}"/>
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="provenance-facts-predicate"><f:translate key="{ll}predicate"/></label>
+                            <select id="provenance-facts-predicate" name="predicate" class="form-select">
+                                <option value=""><f:translate key="{ll}all"/></option>
+                                <f:for each="{predicates}" as="predicate">
+                                    <option value="{predicate}" {f:if(condition: '{predicate} == {filter.predicate}', then: 'selected="selected"')}>{predicate}</option>
+                                </f:for>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="provenance-facts-confidence"><f:translate key="{ll}confidence"/></label>
+                            <select id="provenance-facts-confidence" name="confidence" class="form-select">
+                                <option value=""><f:translate key="{ll}all"/></option>
+                                <f:for each="{confidences}" as="confidence">
+                                    <option value="{confidence}" {f:if(condition: '{confidence} == {filter.confidence}', then: 'selected="selected"')}>{confidence}</option>
+                                </f:for>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary"><f:translate key="{ll}apply"/></button>
+                            <f:if condition="{filtered}"><a href="{resetUrl}" class="btn btn-default"><f:translate key="{ll}reset"/></a></f:if>
+                        </div>
+                    </form>
+
+                    <f:render partial="Overview/LiveNotice" arguments="{inWorkspace: inWorkspace}"/>
+
+                    <f:if condition="{rows}">
+                        <f:then>
+                            <p class="text-body-secondary"><f:translate key="{ll}count" arguments="{0: result.total}"/></p>
+                            <div class="table-fit">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th><f:translate key="{ll}column.factId"/></th>
+                                            <th><f:translate key="{ll}column.quote"/></th>
+                                            <th><f:translate key="{ll}column.subject"/></th>
+                                            <th><f:translate key="{ll}column.predicate"/></th>
+                                            <th><f:translate key="{ll}column.value"/></th>
+                                            <th><f:translate key="{ll}column.evidence"/></th>
+                                            <th><f:translate key="{ll}column.confidence"/></th>
+                                            <th><f:translate key="{ll}column.valid"/></th>
+                                            <th><f:translate key="{ll}column.page"/></th>
+                                            <f:for each="{rows.0.extra}" key="name" as="value"><th>{name}</th></f:for>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <f:for each="{rows}" as="row">
+                                            <tr>
+                                                <td>
+                                                    <code>{row.factId}</code>
+                                                    <f:if condition="{row.factHidden}"> <span class="badge badge-warning"><f:translate key="{ll}badge.factHidden"/></span></f:if>
+                                                    <f:if condition="{row.contentHidden}"> <span class="badge badge-warning"><f:translate key="{ll}badge.contentHidden"/></span></f:if>
+                                                </td>
+                                                <td>„{row.quote}“</td>
+                                                <td><f:render section="Uri" arguments="{link: row.subjectLink, label: row.subjectLabel}"/></td>
+                                                <td>{row.predicate}</td>
+                                                <td>
+                                                    <f:if condition="{row.objectUri}">
+                                                        <f:then><f:render section="Uri" arguments="{link: row.objectUriLink, label: row.objectUriLabel}"/><f:if condition="{row.objectLiteral}"><br/><span class="text-body-secondary">{row.objectLiteral}</span></f:if></f:then>
+                                                        <f:else>{row.objectLiteral}</f:else>
+                                                    </f:if>
+                                                </td>
+                                                <td><f:render section="Uri" arguments="{link: row.sourceLink, label: row.sourceLabel}"/></td>
+                                                <td>{row.confidence}</td>
+                                                <td>
+                                                    <f:if condition="{row.validFrom}"><f:format.date format="Y-m-d">@{row.validFrom}</f:format.date></f:if>
+                                                    <f:if condition="{row.validFrom} || {row.validUntil}">–</f:if>
+                                                    <f:if condition="{row.validUntil}"><f:format.date format="Y-m-d">@{row.validUntil}</f:format.date></f:if>
+                                                </td>
+                                                <td>
+                                                    <a href="{row.pageUrl}">{row.pageTitle}</a>
+                                                    <f:if condition="{row.pageHidden}"> <span class="badge badge-warning"><f:translate key="{ll}badge.pageHidden"/></span></f:if>
+                                                </td>
+                                                <f:for each="{row.extra}" as="value"><td>{value}</td></f:for>
+                                                <td class="col-control">
+                                                    <f:if condition="{row.editUrl}">
+                                                        <a href="{row.editUrl}" class="btn btn-default btn-sm" title="{f:translate(key: '{ll}edit')}"><core:icon identifier="actions-open"/></a>
+                                                    </f:if>
+                                                </td>
+                                            </tr>
+                                        </f:for>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <f:if condition="{result.pages} > 1">
+                                <nav class="d-flex gap-2 align-items-center">
+                                    <f:if condition="{previousUrl}"><a href="{previousUrl}" class="btn btn-default btn-sm"><f:translate key="{ll}previous"/></a></f:if>
+                                    <span><f:translate key="{ll}pageOf" arguments="{0: result.page, 1: result.pages}"/></span>
+                                    <f:if condition="{nextUrl}"><a href="{nextUrl}" class="btn btn-default btn-sm"><f:translate key="{ll}next"/></a></f:if>
+                                </nav>
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:be.infobox state="-1">
+                                <f:if condition="{filtered}">
+                                    <f:then><f:translate key="{ll}emptyFiltered"/></f:then>
+                                    <f:else><f:translate key="{ll}empty"/> <a href="{manualUrl}" target="_blank" rel="noopener"><f:translate key="{ll}manual"/></a></f:else>
+                                </f:if>
+                            </f:be.infobox>
+                        </f:else>
+                    </f:if>
+                </f:then>
+            </f:if>
+        </f:then>
+    </f:if>
+</f:section>
+
+<f:section name="Uri">
+    <f:if condition="{link}">
+        <f:then><a href="{link}" target="_blank" rel="noopener noreferrer" title="{link}">{label}</a></f:then>
+        <f:else>{label}</f:else>
+    </f:if>
+</f:section>
+
+</html>

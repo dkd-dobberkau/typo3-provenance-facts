@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="EXT:provenance_facts/Resources/Private/Language/locallang_module.xlf" date="2026-11-14T00:00:00Z" product-name="provenance_facts">
+        <header/>
+        <body>
+            <trans-unit id="search"><source>Search</source></trans-unit>
+            <trans-unit id="search.placeholder"><source>Fact ID, quote, subject, value or evidence</source></trans-unit>
+            <trans-unit id="predicate"><source>Predicate</source></trans-unit>
+            <trans-unit id="confidence"><source>Confidence</source></trans-unit>
+            <trans-unit id="all"><source>All</source></trans-unit>
+            <trans-unit id="apply"><source>Apply</source></trans-unit>
+            <trans-unit id="reset"><source>Reset</source></trans-unit>
+            <trans-unit id="count"><source>%d facts</source></trans-unit>
+            <trans-unit id="noAccess"><source>You may not view facts.</source></trans-unit>
+            <trans-unit id="empty"><source>No facts here. Editors create facts in the rich text editor: select the words that state the fact and press "Fact".</source></trans-unit>
+            <trans-unit id="emptyFiltered"><source>No facts match the search or filters.</source></trans-unit>
+            <trans-unit id="manual"><source>Facts in the manual</source></trans-unit>
+            <trans-unit id="column.factId"><source>Fact ID</source></trans-unit>
+            <trans-unit id="column.quote"><source>Quote</source></trans-unit>
+            <trans-unit id="column.subject"><source>Subject</source></trans-unit>
+            <trans-unit id="column.predicate"><source>Predicate</source></trans-unit>
+            <trans-unit id="column.value"><source>Value</source></trans-unit>
+            <trans-unit id="column.evidence"><source>Evidence</source></trans-unit>
+            <trans-unit id="column.confidence"><source>Confidence</source></trans-unit>
+            <trans-unit id="column.valid"><source>Valid</source></trans-unit>
+            <trans-unit id="column.page"><source>Page</source></trans-unit>
+            <trans-unit id="edit"><source>Edit the content element</source></trans-unit>
+            <trans-unit id="badge.factHidden"><source>Fact hidden</source></trans-unit>
+            <trans-unit id="badge.contentHidden"><source>Element hidden</source></trans-unit>
+            <trans-unit id="badge.pageHidden"><source>Page hidden</source></trans-unit>
+            <trans-unit id="previous"><source>Previous</source></trans-unit>
+            <trans-unit id="next"><source>Next</source></trans-unit>
+            <trans-unit id="pageOf"><source>Page %d of %d</source></trans-unit>
+        </body>
+    </file>
+</xliff>

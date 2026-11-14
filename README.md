@@ -47,6 +47,12 @@ Limits of this version:
   (`RTE.default.preset = provenance`) or add the plugin to your own preset,
   see the manual. The text is not changed; the quote is matched on the page.
 
+### Facts overview
+
+The backend module **Content > Provenance > Facts** (Web > Provenance in
+TYPO3 13) lists all facts of the selected page and its subpages, with search,
+filters and a link to edit each fact's content element.
+
 ### Lookups in the fact dialog
 
 Other extensions can help editors research a fact in the **Fact** dialog. They

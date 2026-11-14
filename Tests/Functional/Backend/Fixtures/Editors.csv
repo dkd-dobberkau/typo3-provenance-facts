@@ -1,0 +1,10 @@
+"be_groups"
+,"uid","pid","title","tables_select","tables_modify","groupMods"
+,1,0,"Readers without facts","pages,tt_content","","provenance,provenance_facts"
+,2,0,"Readers","pages,tt_content,tx_provenancefacts_fact","","provenance,provenance_facts"
+,3,0,"Editors","pages,tt_content,tx_provenancefacts_fact","tt_content,tx_provenancefacts_fact","provenance,provenance_facts"
+"be_users"
+,"uid","pid","username","admin","usergroup","db_mountpoints","options"
+,2,0,"no-facts",0,"1","1",3
+,3,0,"reader",0,"2","1",3
+,4,0,"editor",0,"3","1",3

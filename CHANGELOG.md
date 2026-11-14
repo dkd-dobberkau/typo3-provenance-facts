@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Submodule "Facts" of the backend module "Provenance": all facts of a page
+  subtree with search, predicate and confidence filters, pagination and an
+  edit link to the content element. `ModifyFactOverviewRowEvent` and
+  `BeforeFactOverviewRenderedEvent` let other extensions add columns and
+  actions.
+
 ### Changed
 
 - Facts no longer raise the conformance level themselves; the signing

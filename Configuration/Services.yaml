@@ -19,3 +19,6 @@ services:
   # Used by the facts overview of the Provenance module
   CmsProvenance\ProvenanceFacts\Backend\FactOverview:
     public: true
+
+  CmsProvenance\ProvenanceFacts\Backend\Controller\FactsModuleController:
+    public: true
