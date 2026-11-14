@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CmsProvenance\ProvenanceFacts\Backend\Controller;
 
 use CmsProvenance\Provenance\Backend\Controller\PagesModuleController;
+use CmsProvenance\Provenance\Backend\ExtraColumns;
 use CmsProvenance\Provenance\Backend\PageSubtree;
 use CmsProvenance\ProvenanceFacts\Backend\FactFilter;
 use CmsProvenance\ProvenanceFacts\Backend\FactOverview;
@@ -54,6 +55,8 @@ final readonly class FactsModuleController
         $result = $this->factOverview->find($pageIds, $filter, (int)($query['page'] ?? 1));
         $moduleUrl = fn(array $parameters = []): string => (string)$this->uriBuilder->buildUriFromRoute($module->getIdentifier(), ['id' => $pageId] + $parameters);
 
+        $overview = ExtraColumns::normalize($this->forDisplay($result['rows'], $user, (string)$request->getUri()));
+
         $view = $this->moduleTemplateFactory->create($request);
         $view->setTitle($GLOBALS['LANG']->sL($module->getTitle()), (string)($pageRecord['title'] ?? ''));
         $view->makeDocHeaderModuleMenu(['id' => $pageId]);
@@ -70,7 +73,8 @@ final readonly class FactsModuleController
             'confidences' => self::CONFIDENCE,
             'inWorkspace' => $user->workspace !== 0,
             'result' => $result,
-            'rows' => $this->forDisplay($result['rows'], $user, (string)$request->getUri()),
+            'rows' => $overview['rows'],
+            'extraColumns' => $overview['columns'],
             'moduleUrl' => $moduleUrl(),
             'resetUrl' => $moduleUrl(['search' => '', 'predicate' => '', 'confidence' => '']),
             'previousUrl' => $result['page'] > 1 ? $moduleUrl(['page' => $result['page'] - 1]) : '',

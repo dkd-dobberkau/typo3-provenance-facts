@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace CmsProvenance\ProvenanceFacts\Tests\Functional\Backend;
 
 use CmsProvenance\ProvenanceFacts\Backend\Controller\FactsModuleController;
+use CmsProvenance\ProvenanceFacts\Event\ModifyFactOverviewRowEvent;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Backend\Module\ModuleData;
 use TYPO3\CMS\Backend\Module\ModuleProvider;
 use TYPO3\CMS\Backend\Routing\Route;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\EventDispatcher\ListenerProvider;
 use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
@@ -38,7 +40,7 @@ final class FactsModuleControllerTest extends FunctionalTestCase
 
         self::assertStringContainsString('opened in 1683', $body);
         self::assertStringContainsString('>Q636400</a>', $body);
-        self::assertStringContainsString('6 facts', $body);
+        self::assertStringContainsString('7 facts', $body);
         self::assertStringContainsString('record/edit', $body);
     }
 
@@ -85,6 +87,25 @@ final class FactsModuleControllerTest extends FunctionalTestCase
 
         self::assertStringNotContainsString('href="javascript:', $body);
         self::assertStringContainsString('javascript:alert(1)', $body);
+    }
+
+    #[Test]
+    public function listenersCanAddLinkColumns(): void
+    {
+        $this->getContainer()->set('provenance.test.fact-link-listener', new class () {
+            public function __invoke(ModifyFactOverviewRowEvent $event): void
+            {
+                $row = $event->getRow();
+                $row['extra']['Check'] = ['label' => 'Wikidata', 'url' => 'https://www.wikidata.org/wiki/' . $row['factId']];
+                $event->setRow($row);
+            }
+        });
+        $this->get(ListenerProvider::class)->addListener(ModifyFactOverviewRowEvent::class, 'provenance.test.fact-link-listener');
+
+        $body = $this->render(1, ['id' => 1, 'depth' => 1]);
+
+        self::assertStringContainsString('<th>Check</th>', $body);
+        self::assertStringContainsString('href="https://www.wikidata.org/wiki/ashmolean-opened"', $body);
     }
 
     /**

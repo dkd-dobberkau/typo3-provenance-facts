@@ -74,7 +74,7 @@
                                             <th><f:translate key="{ll}column.confidence"/></th>
                                             <th><f:translate key="{ll}column.valid"/></th>
                                             <th><f:translate key="{ll}column.page"/></th>
-                                            <f:for each="{rows.0.extra}" key="name" as="value"><th>{name}</th></f:for>
+                                            <f:for each="{extraColumns}" as="column"><th>{column}</th></f:for>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -106,7 +106,7 @@
                                                     <a href="{row.pageUrl}">{row.pageTitle}</a>
                                                     <f:if condition="{row.pageHidden}"> <span class="badge badge-warning"><f:translate key="{ll}badge.pageHidden"/></span></f:if>
                                                 </td>
-                                                <f:for each="{row.extra}" as="value"><td>{value}</td></f:for>
+                                                <f:for each="{row.extra}" as="cell"><td><f:render partial="Overview/ExtraCell" arguments="{cell: cell}"/></td></f:for>
                                                 <td class="col-control">
                                                     <f:if condition="{row.editUrl}">
                                                         <a href="{row.editUrl}" class="btn btn-default btn-sm" title="{f:translate(key: '{ll}edit')}"><core:icon identifier="actions-open"/></a>

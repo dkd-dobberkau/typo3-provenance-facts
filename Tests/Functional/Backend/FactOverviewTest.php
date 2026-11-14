@@ -25,7 +25,7 @@ final class FactOverviewTest extends FunctionalTestCase
     public function listsLiveDefaultLanguageFactsOfTheGivenPagesInOrder(): void
     {
         self::assertSame(
-            ['ashmolean-opened', 'draft-fact', 'in-hidden-element', 'sale', 'other-sale', 'on-hidden-page'],
+            ['ashmolean-opened', 'draft-fact', 'in-hidden-element', 'all-languages', 'sale', 'other-sale', 'on-hidden-page'],
             $this->factIds($this->find())
         );
     }
@@ -97,7 +97,7 @@ final class FactOverviewTest extends FunctionalTestCase
     public function resultsArePaginatedAndThePageIsClamped(): void
     {
         $connection = $this->get(ConnectionPool::class)->getConnectionForTable('tx_provenancefacts_fact');
-        for ($i = 1; $i <= 114; $i++) {
+        for ($i = 1; $i <= 113; $i++) {
             $connection->insert('tx_provenancefacts_fact', ['pid' => 1, 'content_uid' => 1, 'sorting' => 2000 + $i, 'fact_id' => 'bulk-' . $i, 'quote' => 'x', 'subject' => 'https://example.org/', 'predicate' => 'description', 'object_literal' => 'v', 'confidence' => 'asserted']);
         }
 

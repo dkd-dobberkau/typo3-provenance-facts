@@ -17,6 +17,7 @@
 ,6,1,"text",256,0,0,1,0,0,"<p>Übersetzung.</p>"
 ,7,1,"text",256,0,0,0,1,1,"<p>Draft.</p>"
 ,8,4,"text",256,0,0,0,0,0,"<p>Elsewhere.</p>"
+,9,1,"text",1000,0,0,-1,0,0,"<p>For all languages.</p>"
 "tx_provenancefacts_fact"
 ,"uid","pid","content_uid","sorting","hidden","deleted","t3ver_wsid","t3ver_oid","fact_id","quote","subject","predicate","object_literal","object_uri","source_url","confidence"
 ,1,1,1,256,0,0,0,0,"ashmolean-opened","opened in 1683","http://www.wikidata.org/entity/Q636400","foundingDate","1683","","https://en.wikipedia.org/wiki/Ashmolean_Museum","asserted"
@@ -32,3 +33,4 @@
 ,11,1,7,256,0,0,0,0,"draft-element","x","https://example.org/g","description","z","","","asserted"
 ,12,1,1,1024,0,0,1,1,"workspace-version","x","https://example.org/h","description","z","","","asserted"
 ,13,4,8,256,0,0,0,0,"elsewhere","x","https://example.org/i","description","z","","","asserted"
+,14,1,9,256,0,0,0,0,"all-languages","x","https://example.org/j","description","z","","","asserted"

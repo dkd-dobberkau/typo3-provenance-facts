@@ -12,7 +12,7 @@ use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
 /**
  * The facts of a set of pages for the "Facts" overview: live facts of live
- * default-language content elements, hidden ones included and marked.
+ * default-language (or all-language) content elements, hidden ones included and marked.
  * Sorted like the page tree (in the order of the given pages), then by the
  * element's and the fact's position.
  */
@@ -97,7 +97,8 @@ final readonly class FactOverview
                 $expr->eq('p.deleted', $zero),
                 $expr->eq('f.t3ver_wsid', $zero),
                 $expr->eq('c.t3ver_wsid', $zero),
-                $expr->eq('c.sys_language_uid', $zero)
+                // -1: elements shown in every language, so also in the default one.
+                $expr->in('c.sys_language_uid', $queryBuilder->createNamedParameter([0, -1], Connection::PARAM_INT_ARRAY))
             );
     }
 
